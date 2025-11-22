@@ -1,0 +1,1 @@
+/home/o_oji/Desktop/autonomous_warehouse_robot/build/warehouse_robot_manipulation/ament_cmake_core/warehouse_robot_manipulationConfig-version.cmake

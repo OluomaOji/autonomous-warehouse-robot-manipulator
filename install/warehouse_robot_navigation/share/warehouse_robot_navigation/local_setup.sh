@@ -1,0 +1,1 @@
+/home/o_oji/Desktop/autonomous_warehouse_robot/build/warehouse_robot_navigation/ament_cmake_environment_hooks/local_setup.sh

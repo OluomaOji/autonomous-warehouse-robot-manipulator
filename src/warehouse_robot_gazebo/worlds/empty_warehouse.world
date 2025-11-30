@@ -1,0 +1,229 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="warehouse_world">
+
+    <!-- Ground -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Light -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- ===========================
+         Warehouse Shelves (3 rows)
+         =========================== -->
+
+    <!-- Row 1 -->
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>shelf_row1_1</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>shelf_row1_2</name>
+      <pose>0 2 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>shelf_row1_3</name>
+      <pose>0 4 0 0 0 0</pose>
+    </include>
+
+    <!-- Row 2 -->
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>shelf_row2_1</name>
+      <pose>3 0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>shelf_row2_2</name>
+      <pose>3 2 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>shelf_row2_3</name>
+      <pose>3 4 0 0 0 0</pose>
+    </include>
+
+    <!-- Row 3 -->
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>shelf_row3_1</name>
+      <pose>6 0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>shelf_row3_2</name>
+      <pose>6 2 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>shelf_row3_3</name>
+      <pose>6 4 0 0 0 0</pose>
+    </include>
+
+    <!-- ===========================
+         Boxes placed randomly
+         =========================== -->
+
+    <include>
+      <uri>model://wood_cube_10cm</uri>
+      <name>box1</name>
+      <pose>1 1 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://wood_cube_10cm</uri>
+      <name>box2</name>
+      <pose>4 1 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://wood_cube_10cm</uri>
+      <name>box3</name>
+      <pose>2 3 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://wood_cube_10cm</uri>
+      <name>box4</name>
+      <pose>5 3 0 0 0 0</pose>
+    </include>
+
+    <!-- Few boxes on shelves -->
+    <include>
+      <uri>model://wood_cube_10cm</uri>
+      <name>shelf_box1</name>
+      <pose>0 0 1.2 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://wood_cube_10cm</uri>
+      <name>shelf_box2</name>
+      <pose>3 2 1.2 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://wood_cube_10cm</uri>
+      <name>shelf_box3</name>
+      <pose>6 4 1.2 0 0 0</pose>
+    </include>
+
+        <!-- ===========================
+         Warehouse Perimeter Walls
+         =========================== -->
+
+    <!-- Back Wall -->
+    <model name="back_wall">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>12 0.2 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>12 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+          </material>
+        </visual>
+        <pose>3 6 1.5 0 0 0</pose>
+      </link>
+    </model>
+
+    <!-- Front Wall -->
+    <model name="front_wall">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>12 0.2 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>12 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+          </material>
+        </visual>
+        <pose>3 -2 1.5 0 0 0</pose>
+      </link>
+    </model>
+
+    <!-- Left Wall -->
+    <model name="left_wall">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.2 8 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.2 8 3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+          </material>
+        </visual>
+        <pose>-1 2 1.5 0 0 0</pose>
+      </link>
+    </model>
+
+    <!-- Right Wall -->
+    <model name="right_wall">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.2 8 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.2 8 3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+          </material>
+        </visual>
+        <pose>7 2 1.5 0 0 0</pose>
+      </link>
+    </model>
+
+
+  </world>
+</sdf>

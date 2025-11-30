@@ -1,1 +1,176 @@
-<
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="warehouse_mobile_manipulator">
+
+  <!-- ========================== -->
+  <!-- PROPERTIES -->
+  <!-- ========================== -->
+  <xacro:property name="my_pi" value="3.14159265359"/>
+
+    <!-- ========================== -->
+  <!-- MATERIALS -->
+  <!-- ========================== -->
+  <material name="blue1">
+      <color rgba="0.2 0.3 0.8 1.0"/>
+  </material>
+
+  <material name="orange1">
+      <color rgba="1.0 0.5 0.0 1.0"/>
+  </material>
+
+  <material name="red1">
+      <color rgba="0.8 0.2 0.2 1.0"/>
+  </material>
+
+  <material name="grey1">
+      <color rgba="0.6 0.6 0.6 1.0"/>
+  </material>
+
+  <material name="white1">
+      <color rgba="0.9 0.9 0.9 1.0"/>
+  </material>
+
+  <material name="black1">
+      <color rgba="0.1 0.1 0.1 1"/>
+  </material>
+
+  <!-- ========================== -->
+  <!-- INCLUDE MODULES -->
+  <!-- ========================== -->
+  <xacro:include filename="$(find warehouse_robot_description)/urdf/mobile_base.urdf.xacro"/>
+  <xacro:include filename="$(find warehouse_robot_description)/urdf/manipulator.urdf.xacro"/>
+  <xacro:include filename="$(find warehouse_robot_description)/urdf/gripper.urdf.xacro"/>
+  <xacro:include filename="$(find warehouse_robot_description)/urdf/sensors.urdf.xacro"/>
+
+  <!-- ========================== -->
+  <!-- INSTANTIATE MODULES -->
+  <!-- ========================== -->
+  <xacro:robot_base/>
+  <xacro:manipulator parent="mount_plate"/>
+  <xacro:gripper parent="link6"/>
+  <xacro:robot_sensors parent="base_link"/>
+
+  
+  <!-- ========================== -->
+  <!-- GAZEBO MATERIALS -->
+  <!-- ========================== -->
+  <gazebo reference="main_base_link">
+    <material>Gazebo/Grey</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+
+  <gazebo reference="right_wheel">
+    <material>Gazebo/Black</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+
+  <gazebo reference="left_wheel">
+    <material>Gazebo/Black</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+
+  <gazebo reference="caster_wheel">
+    <material>Gazebo/White</material>
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+  </gazebo>
+
+  <!-- Arm links -->
+  <gazebo reference="link1"><material>Gazebo/Blue</material></gazebo>
+  <gazebo reference="link2"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="link3"><material>Gazebo/Blue</material></gazebo>
+  <gazebo reference="link4"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="link5"><material>Gazebo/Red</material></gazebo>
+  <gazebo reference="link6"><material>Gazebo/Blue</material></gazebo>
+
+  <!-- Gripper -->
+  <gazebo reference="gripper_base"><material>Gazebo/Grey</material></gazebo>
+  <gazebo reference="left_finger"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="right_finger"><material>Gazebo/DarkGrey</material></gazebo>
+
+  <!-- Sensors -->
+  <gazebo reference="lidar_link">
+    <material>Gazebo/Red</material>
+    <sensor type="ray" name="lidar_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+      <plugin name="gazebo_ros_lidar" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <remapping>~/out:=scan</remapping>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="camera_link">
+    <material>Gazebo/Black</material>
+    <sensor type="camera" name="camera_sensor">
+      <update_rate>30.0</update_rate>
+      <camera name="front_camera">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <ros>
+          <remapping>~/image_raw:=camera/image_raw</remapping>
+          <remapping>~/camera_info:=camera/camera_info</remapping>
+        </ros>
+        <camera_name>front_camera</camera_name>
+        <frame_name>camera_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- ========================== -->
+  <!-- CONTROL PLUGINS -->
+  <!-- ========================== -->
+  <gazebo>
+    <plugin name="diff_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <ros>
+        <namespace>/</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>50</update_rate>
+      <left_joint>left_wheel_to_base</left_joint>
+      <right_joint>right_wheel_to_base</right_joint>
+      <wheel_separation>0.45</wheel_separation>
+      <wheel_diameter>0.2</wheel_diameter>
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </gazebo>
+
+</robot>

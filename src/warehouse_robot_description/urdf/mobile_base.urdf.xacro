@@ -14,135 +14,161 @@
     <xacro:property name="caster_radius" value="0.05"/>
     <xacro:property name="caster_mass" value="1.0"/>
 
-    <material name="blue">
-        <color rgba="0.2 0.2 0.8 1.0"/>
-    </material>
-    <material name="black">
-        <color rgba="0.1 0.1 0.1 1.0"/>
-    </material>
-    <material name="gray">
-        <color rgba="0.5 0.5 0.5 1.0"/>
-    </material>
-    <material name="white">
-        <color rgba="0.9 0.9 0.9 1.0"/>
-    </material>
+    <xacro:property name="mount_height" value="0.02"/>
+    <xacro:property name="mount_radius" value="0.12"/>
+    <xacro:property name="mount_mass" value="0.5"/>
 
     <!-- ============================== -->
     <!--          LINKS                 -->
     <!-- ============================== -->
     <!-- Base Link -->
-    <link name="base_link">
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <geometry>
-                <box size= "${base_length} ${base_width} ${base_height}"/>
-            </geometry>
-            <material name="blue"/>
-        </visual>
-        <collision>
-            <origin xyz = "0 0 0" rpy = "0 0 0"/>
-            <geometry>
-                <box size="${base_length} ${base_width} ${base_height}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <mass value="${base_mass}" />
-            <inertia ixx="0.1" iyy="0.33" izz="0.43"
-                    ixy="0.0" ixz="0.0" iyz="0.0"/>
-        </inertial>
+    <xacro:macro name="robot_base">
+        <link name="base_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size= "${base_length} ${base_width} ${base_height}"/>
+                </geometry>
+                <material name="grey1"/>
+            </visual>
+            <collision>
+                <origin xyz = "0 0 0" rpy = "0 0 0"/>
+                <geometry>
+                    <box size="${base_length} ${base_width} ${base_height}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="${base_mass}" />
+                <inertia ixx="0.1" iyy="0.33" izz="0.43"
+                        ixy="0.0" ixz="0.0" iyz="0.0"/>
+            </inertial>
 
-    </link>
+        </link>
 
     <!-- Right Wheel -->
-    <link name="right_wheel">
-        <visual>
-            <origin xyz="0 0 0" rpy="1.57 0 0"/>
-            <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
-            </geometry>
-            <material name="black"/>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="1.57 0 0"/>
-            <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <mass value="${wheel_mass}"/>
-            <inertia ixx="0.1" iyy="0.1" izz="0.1"
-                ixy="0.0" ixz="0.0" iyz="0.0"/>
-        </inertial>
-    </link>
+        <link name="right_wheel">
+            <visual>
+                <origin xyz="0 0 0" rpy="1.57 0 0"/>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+                </geometry>
+                <material name="black1"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="1.57 0 0"/>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="${wheel_mass}"/>
+                <inertia ixx="0.1" iyy="0.1" izz="0.1"
+                    ixy="0.0" ixz="0.0" iyz="0.0"/>
+            </inertial>
+        </link>
 
-    <!-- Left Wheel-->
-    <link name="left_wheel">
-        <visual>
-            <origin xyz="0 0 0" rpy="1.57 0 0"/>
-            <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
-            </geometry>
-            <material name="black"/>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="1.57 0 0"/>
-            <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <mass value="${wheel_mass}"/>
-            <inertia ixx="0.1" iyy="0.1" izz="0.1"
-                ixy="0.0" ixz="0.0" iyz="0.0"/>
-        </inertial>
-    </link>
+        <!-- Left Wheel-->
+        <link name="left_wheel">
+            <visual>
+                <origin xyz="0 0 0" rpy="1.57 0 0"/>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+                </geometry>
+                <material name="black1"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="1.57 0 0"/>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="${wheel_mass}"/>
+                <inertia ixx="0.1" iyy="0.1" izz="0.1"
+                    ixy="0.0" ixz="0.0" iyz="0.0"/>
+            </inertial>
+        </link>
 
-    <!-- Caster Wheel -->
-    <link name="caster_wheel">
-        <visual>
-            <origin xyz="0 0 0" rpy="1.57 0 0"/>
-            <geometry>
-                <sphere radius="${caster_radius}"/>
-            </geometry>
-            <material name="white"/>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="1.57 0 0"/>
-            <geometry>
-                <sphere radius="${caster_radius}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <mass value="${caster_mass}"/>
-            <inertia ixx="0.1" iyy="0.1" izz="0.1"
-                ixy="0.0" ixz="0.0" iyz="0.0"/>
-        </inertial>
-    </link>
+        <!-- Caster Wheel -->
+        <link name="caster_wheel">
+            <visual>
+                <origin xyz="0 0 0" rpy="1.57 0 0"/>
+                <geometry>
+                    <sphere radius="${caster_radius}"/>
+                </geometry>
+                <material name="white1"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="1.57 0 0"/>
+                <geometry>
+                    <sphere radius="${caster_radius}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="${caster_mass}"/>
+                <inertia ixx="0.1" iyy="0.1" izz="0.1"
+                    ixy="0.0" ixz="0.0" iyz="0.0"/>
+            </inertial>
+        </link>
 
-    <!-- ============================== -->
-    <!--          JOINTS                -->
-    <!-- ============================== -->
-    <!-- right to base wheel -->
-    <joint name="right_wheel_to_base" type="continuous">
-        <parent link="base_link"/>
-        <child link="right_wheel"/>
-        <origin xyz="0 -0.225 -${wheel_radius}" rpy="0 0 0"/>
-        <axis xyz="0 1 0"/>
-    </joint>
-    <!-- left wheel to base  -->
-    <joint name="left_wheel_to_base" type="continuous">
-        <parent link="base_link"/>
-        <child link="left_wheel"/>
-        <origin xyz="0 0.225 -${wheel_radius}" rpy="0 0 0"/>
-        <axis xyz="0 1 0"/>
-    </joint>
-    <!-- Caster Wheel to base-->
-    <joint name="caster_wheel_to_base" type="fixed">
-        <parent link="base_link"/>
-        <child link="caster_wheel"/>
-        <origin xyz="0.25 0 -0.15" rpy="0 0 0"/>
-        <axis xyz="0 1 0"/>
-    </joint>
+        <link name="mount_plate">
+            <visual>
+                <origin xyz="0 0 ${mount_height/2}" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="${mount_radius}" length="${mount_height}"/>
+                </geometry>
+                <material name="black1"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 ${mount_height/2}" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="${mount_radius}" length="${mount_height}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="${mount_mass}"/>
+                <inertia ixx="${mount_mass*(3*mount_radius*mount_radius + mount_height)/12}"
+                            iyy="${mount_mass*(3*mount_radius*mount_radius + mount_height)/12}"
+                            izz="${base_mass*(mount_radius*mount_radius)/2}"
+                            iyz="0.0"
+                            ixz="0.0"
+                            ixy="0.0"/>
+            </inertial>
 
+        </link>
 
+        <!-- ============================== -->
+        <!--          JOINTS                -->
+        <!-- ============================== -->
+        <!-- right to base wheel -->
+        <joint name="right_wheel_to_base" type="continuous">
+            <parent link="base_link"/>
+            <child link="right_wheel"/>
+            <origin xyz="0 -0.225 -${wheel_radius}" rpy="0 0 0"/>
+            <axis xyz="0 1 0"/>
+        </joint>
+        <!-- left wheel to base  -->
+        <joint name="left_wheel_to_base" type="continuous">
+            <parent link="base_link"/>
+            <child link="left_wheel"/>
+            <origin xyz="0 0.225 -${wheel_radius}" rpy="0 0 0"/>
+            <axis xyz="0 1 0"/>
+        </joint>
+        <!-- Caster Wheel to base-->
+        <joint name="caster_wheel_to_base" type="fixed">
+            <parent link="base_link"/>
+            <child link="caster_wheel"/>
+            <origin xyz="0.25 0 -0.15" rpy="0 0 0"/>
+            <axis xyz="0 1 0"/>
+        </joint>
+        <!-- Mount Link to Base -->
+        <joint name="mount_to_base" type="fixed">
+            <parent link="base_link"/>
+            <child link="mount_plate"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+
+    
+    
 </robot>

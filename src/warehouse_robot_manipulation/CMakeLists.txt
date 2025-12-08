@@ -10,6 +10,18 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(nav2_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(moveit_ros_planning_interface REQUIRED)
+find_package(std_srvs REQUIRED)
+
+install(
+  PROGRAMS
+    scripts/pick_and_place_node.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

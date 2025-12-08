@@ -1,0 +1,21 @@
+# SLAM Toolbox tuned for warehouse
+
+slam_toolbox:
+  ros__parameters:
+    use_sim_time: True
+    mode: "mapping"
+    map_resolution: 0.05
+    max_laser_range: 20.0
+    transform_timeout: 0.2
+    minimum_score: 200
+    loop_search_maximum_distance: 15.0
+    do_loop_closing: true
+    do_relocation: true
+    enable_interactive_mode: false
+
+    # Core Parameters
+    scan_topic: "/scan"
+    odom_topic: "/odom"
+    map_frame: "map"
+    odom_frame: "odom"
+    base_frame: "base_link" 

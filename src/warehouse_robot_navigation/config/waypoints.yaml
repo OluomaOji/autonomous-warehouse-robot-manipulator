@@ -1,0 +1,13 @@
+waypoints:
+  - id: row1_shelf1
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    orientation:
+      roll: -0.5
+      pitch: 0.0
+      yaw: 0.0
+  - id: row1_shelf2
+    position:
+      x: 2.0

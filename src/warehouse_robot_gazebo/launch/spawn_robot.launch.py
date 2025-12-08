@@ -1,3 +1,7 @@
+"""
+Warehouse Robot Spawn Launch File: Launch file to spawn the warehouse robot in Gazebo
+"""
+
 import os
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
@@ -41,13 +45,13 @@ def generate_launch_description():
     
     x_pose = DeclareLaunchArgument(
         name='x_pose',
-        default_value='0.0',
+        default_value='3.0',
         description='X position to spawn robot'
     )
     
     y_pose = DeclareLaunchArgument(
         name='y_pose',
-        default_value='0.0',
+        default_value='3.0',
         description='Y position to spawn robot'
     )
     

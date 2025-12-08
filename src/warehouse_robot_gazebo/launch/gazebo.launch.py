@@ -1,3 +1,7 @@
+"""
+Gazebo Launch File: Launch file to start Gazebo with the warehouse world
+"""
+
 import os
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument

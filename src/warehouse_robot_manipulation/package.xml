@@ -9,6 +9,29 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <depend>warehouse_robot_description</depend>
+  <depend>warehouse_robot_gazebo</depend>
+  <depend>warehouse_robot_navigation</depend>
+
+
+  <build_depend>rclpy</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>nav2_msgs</build_depend>
+  <build_depend>std_srvs</build_depend>
+  <build_depend>tf2_ros</build_depend>
+  <build_depend>moveit_ros_planning_interface</build_depend>
+  <build_depend>launch</build_depend>
+  <build_depend>launch_ros</build_depend>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>nav2_msgs</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>moveit_ros_planning_interface</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 

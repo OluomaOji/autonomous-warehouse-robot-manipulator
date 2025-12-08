@@ -1,0 +1,1 @@
+/home/o_oji/Desktop/autonomous_warehouse_robot/src/warehouse_robot_manipulation/src/pick_and_place_node.py

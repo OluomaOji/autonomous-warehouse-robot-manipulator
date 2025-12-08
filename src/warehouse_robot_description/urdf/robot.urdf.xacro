@@ -5,6 +5,7 @@
   <!-- PROPERTIES -->
   <!-- ========================== -->
   <xacro:property name="my_pi" value="3.14159265359"/>
+  <xacro:property name="mount_height" value="0.02"/>
 
     <!-- ========================== -->
   <!-- MATERIALS -->
@@ -78,17 +79,70 @@
   </gazebo>
 
   <!-- Arm links -->
-  <gazebo reference="link1"><material>Gazebo/Blue</material></gazebo>
-  <gazebo reference="link2"><material>Gazebo/Orange</material></gazebo>
-  <gazebo reference="link3"><material>Gazebo/Blue</material></gazebo>
-  <gazebo reference="link4"><material>Gazebo/Orange</material></gazebo>
-  <gazebo reference="link5"><material>Gazebo/Red</material></gazebo>
-  <gazebo reference="link6"><material>Gazebo/Blue</material></gazebo>
+  <gazebo reference="link1">
+    <material>Gazebo/Blue</material>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+  </gazebo>
+  <gazebo reference="link2">
+    <material>Gazebo/Orange</material>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+  </gazebo>
+  <gazebo reference="link3">
+    <material>Gazebo/Blue</material>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+  </gazebo>
+  <gazebo reference="link4">
+    <material>Gazebo/Orange</material>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+  </gazebo>
+  <gazebo reference="link5">
+    <material>Gazebo/Red</material>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+  </gazebo>
+  <gazebo reference="link6">
+    <material>Gazebo/Blue</material>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+  </gazebo>
 
   <!-- Gripper -->
-  <gazebo reference="gripper_base"><material>Gazebo/Grey</material></gazebo>
-  <gazebo reference="left_finger"><material>Gazebo/DarkGrey</material></gazebo>
-  <gazebo reference="right_finger"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="gripper_base">
+    <material>Gazebo/Grey</material>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+  </gazebo>
+  <gazebo reference="left_finger">
+    <material>Gazebo/DarkGrey</material>
+    <mu1>1.2</mu1>
+    <mu2>1.2</mu2>
+  </gazebo>
+  <gazebo reference="right_finger">
+    <material>Gazebo/DarkGrey</material>
+    <mu1>1.2</mu1>
+    <mu2>1.2</mu2>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="gazebo_ros_joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <ros>
+        <remapping>~/out:=joint_states</remapping>
+      </ros>
+      <update_rate>50</update_rate>
+      <joint_name>joint1</joint_name>
+      <joint_name>joint2</joint_name>
+      <joint_name>joint3</joint_name>
+      <joint_name>joint4</joint_name>
+      <joint_name>joint5</joint_name>
+      <joint_name>joint6</joint_name>
+      <joint_name>left_finger_joint</joint_name>
+      <joint_name>right_finger_joint</joint_name>
+    </plugin>
+  </gazebo>
 
   <!-- Sensors -->
   <gazebo reference="lidar_link">
